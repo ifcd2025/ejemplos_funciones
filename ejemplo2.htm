@@ -78,6 +78,13 @@
         crearLista3(países, document.body, ["texto", "cuadro"]);
         crearLista3(países, document.body);
 
+        const ul = crearLista4(idiomas, ["caja"]);
+        ul.style.color = "red";
+        document.body.appendChild(ul);
+
+        // Como la función devuelve un nodo, podemos añadirlo directamente
+        document.body.appendChild(crearLista4(idiomas, ["texto"]));
+
 
 
 

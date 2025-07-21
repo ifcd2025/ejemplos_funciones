@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ejemplo</title>
+</head>
+<body>
+    <h1>Todo en consola</h1>
+    <script>
+        function isPar(numero) {
+            if(numero % 2 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+            // return numero % 2 == 0;
+        }
+
+        // filtro debería ser una función que recibe un parámetro y devuelve
+        //true o false (a estas funciones se les conoce como predicate)
+        function filtrar(array, filtro) {
+            const resultado = [];
+            for (const valor of array) {
+                if(filtro(valor) /*== true*/) {
+                    resultado.push(valor);
+                }
+            }
+            return resultado;
+        }
+
+        // modificar es una función que recibe un valor y lo devuelve modificado
+        // u otro valor
+        function mapear(array, modificar) {
+            const resultado = [];
+            for (const valor of array) {
+                resultado.push(modificar(valor));
+            }
+            return resultado;
+        }
+
+        // Puedo asignar funciones a variables y usar la función como una variable
+        const f = isPar;
+        console.log(f(4)); // Escribe true
+
+        const datos = [3, 7, 1, 8, 3, 10];
+        console.log(filtrar(datos, isPar)); // Escribe [8, 10]
+        console.log(filtrar(datos, n => n > 5)); // Escribe [7, 8, 10]
+        console.log(filtrar(datos, Number.isInteger)); // Escribe [3, 7, 1, 8, 3, 10]
+
+        console.log(mapear(datos, Math.cos)); // Escribe [-0.9899924966004454, 0.7539022543433046, 0.5403023058681398, -0.14550003380861354, -0.9899924966004454, -0.8390715290764524]
+        console.log(mapear(datos, n => n * n)); // Escribe [9, 49, 1, 64, 9, 100]
+        console.log(mapear(datos, isPar)); // Escribe [false, false, false, true, false, true]
+
+       </script>
+</body>
+</html>

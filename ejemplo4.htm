@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ejemplo</title>
+</head>
+<body>
+    <h1>Solo sale en consola</h1>
+    <script>
+        function calcularTotal(importe, iva) {
+            console.log(importe + importe * iva / 100);
+        }
+        // Si no le paso el IVA quiero que sea el 21
+        function calcularTotal2(importe, iva) {
+            if(iva == undefined) {
+                console.log(importe + importe * 0.21);
+            } else {
+                console.log(importe + importe * iva / 100);
+            }
+        }
+        // Pero para estos casos es mejor usar parámetros con valores por defecto
+        function calcularTotal3(importe, iva = 21) {
+            console.log(importe + importe * iva / 100);
+        }
+
+        /* Función con dos parámetros opcionales, pero que solo admite:
+        - no poner descuento e iva
+        - no poner iva
+        - poner descuento e iva
+        Pero no puedo no poner el descuento y si el iva
+        */
+        function calcularTotalDescuento(importe, descuento = 0, iva = 21) {
+            descuento = importe * descuento / 100;
+            console.log(importe - descuento + (importe - descuento) * iva / 100);
+        }
+
+        // La solución a esto es la desestructurización que "convierte" un
+        // array u objeto en variables. Para objetos se usan {}, para arrays []
+        function calcularTotalDescuento2(importe, {descuento = 0, iva = 21}) {
+            descuento = importe * descuento / 100;
+            console.log(importe - descuento + (importe - descuento) * iva / 100);
+        }
+
+
+        calcularTotal(100, 21); // Escribe 121
+        calcularTotal(100); // Escribe NaN
+        calcularTotal2(100, 21); // Escribe 121
+        calcularTotal2(100); // Escribe 121
+        calcularTotal3(100, 21); // Escribe 121
+        calcularTotal3(100); // Escribe 121
+
+        calcularTotalDescuento(100, 2, 21); // Escribe 118.58
+        calcularTotalDescuento(100, 2); // Escribe 118.58
+
+        calcularTotalDescuento2(100, {descuento: 2, iva: 21}); // Escribe 118.58
+        calcularTotalDescuento2(100, {iva: 21, descuento: 2}); // Escribe 118.58
+        calcularTotalDescuento2(100, {iva: 21}); // Escribe 121
+        calcularTotalDescuento2(100, {descuento: 2}); // Escribe 118.58
+
+
+        
+        
+
+
+
+
+
+    </script>
+</body>
+</html>

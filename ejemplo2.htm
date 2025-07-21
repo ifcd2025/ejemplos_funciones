@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ejemplo</title>
+   <style>
+    .texto {
+        font-weight: bold;
+    }
+    .cuadro {
+        background-color: blanchedalmond;
+    }
+   </style>
+</head>
+<body>
+    <div id="caja"></div>
+    <script>
+        function crearLista(lista) {
+            const ul = document.createElement("ul");
+            for (const elemento of lista) {
+                const li = document.createElement("li");
+                li.textContent = elemento;
+                ul.appendChild(li);
+            }
+            document.body.appendChild(ul);
+        }
+
+        function crearLista2(lista, padre) {
+            const ul = document.createElement("ul");
+            for (const elemento of lista) {
+                const li = document.createElement("li");
+                li.textContent = elemento;
+                ul.appendChild(li);
+            }
+            padre.appendChild(ul);
+        }
+
+        function crearLista3(lista, padre, clases) {
+            const ul = document.createElement("ul");
+            // ... es el operador spread: devuelve los elementos del array
+            // como valores separados. Y lo necesitamos así, pues add espera
+            // valores separados, no un array
+            if(clases != undefined) { // si no pasamos el parámetro clases, tiene el valor undefined
+                ul.classList.add(...clases);
+            }
+            for (const elemento of lista) {
+                const li = document.createElement("li");
+                li.textContent = elemento;
+                ul.appendChild(li);
+            }
+            padre.appendChild(ul);
+        }    
+        
+        // Puede ser más reutilizable crear el elemento y devolverlo
+        // Así luego el que usa la función lo añade o hace con el lo que quiera
+        function crearLista4(lista, clases) {
+            const ul = document.createElement("ul");
+            if(clases != undefined) { // si no pasamos el parámetro clases, tiene el valor undefined
+                ul.classList.add(...clases);
+            }
+            for (const elemento of lista) {
+                const li = document.createElement("li");
+                li.textContent = elemento;
+                ul.appendChild(li);
+            }
+            return ul; // Devolvemos el ul creado
+        }  
+
+        const idiomas = ["español", "inglés", "francés"];
+        const países = ["gambia", "vietnam", "nigeria"];
+        crearLista(idiomas);
+        crearLista(países);
+
+        crearLista2(idiomas, document.body);
+        crearLista2(idiomas, document.getElementById("caja"));
+
+        crearLista3(países, document.body, ["texto", "cuadro"]);
+        crearLista3(países, document.body);
+
+
+
+
+
+    </script>
+</body>
+</html>

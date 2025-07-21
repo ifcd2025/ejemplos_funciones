@@ -6,12 +6,35 @@
    <title>Ejemplo</title>
 </head>
 <body>
+    <h1>Todo sale en consola</h1>
 <script>
     function sumar(n1, n2) {
         console.log(n1 + n2);
     }
-    sumar(4, 2);
-    
+    // Esta función es más reutilizables pues devuelve la suma
+    // y que el programador haga con ella lo que quiera.
+    // La otra función suma solo vale para escribir en consola el resultado
+    function sumar2(n1, n2) {
+        return n1 + n2;
+    }
+    sumar(4, 2); // Escribe 6
+    // Se pueden pasar más parámetros de los necesarios
+    // Simplemente se ignoran
+    sumar(4, 2, 8); // Escribe 6
+    // El segundo parámetro tendrá el valor undefined
+    sumar(2); // Escribe NaN
+    // Esto no da error, pero si la función devuelve algo, lo lógico es
+    // hacer algo con lo que devuelve: mostrarlo, guardarlo, ...
+    sumar2(4, 2);
+    console.log(sumar2(4, 2));
+    const resultado = sumar2(4, 2);
+    if(sumar2(4, 2) > 5) {
+        console.log("Es mayor que 5");
+    }
+    // Un parámetro de una función puede ser una variable, el resultado
+    // de otra función, una expresión, ....
+    console.log(sumar2(2, sumar2(8, 4))); // Escribe 14
+
 </script>
 </body>
 </html>
